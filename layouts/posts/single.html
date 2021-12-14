@@ -1,0 +1,13 @@
+{{ define "main" }}
+<article class="markdown">
+  <h1>
+    <a href="{{ .RelPermalink }}">{{ partial "title.html" . }}</a>
+  </h1>
+  {{ partial "post-meta" . }}
+  {{- .Content -}}
+</article>
+{{ end }}
+
+{{ define "toc" }}
+  {{ partial "toc" . }}
+{{ end }}

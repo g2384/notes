@@ -348,3 +348,10 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+# Hugo's ignore
+public/
+exampleSite/public/
+.DS_Store
+/resources/_gen/
+*hugo_build.lock
