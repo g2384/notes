@@ -81,3 +81,5 @@ disableKinds = ['taxonomy', 'taxonomyTerm']
       hardWraps = false
       unsafe = true
       xhtml = false
+  [markup.highlight]
+    style = 'vs'

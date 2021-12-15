@@ -1,3 +1,12 @@
 /* You can add custom styles here. */
 
 // @import "plugins/numbered";
+
+.highlight code {
+    color: var(--highlight-code-color);
+}
+
+.highlight pre{
+    border: 1px #333 solid;
+    border-radius: .25rem;
+}
