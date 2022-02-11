@@ -15,6 +15,13 @@
 - `PicPick`: A full-featured screen capture tool, Intuitive image editor, color picker, color palette, pixel-ruler, protractor, crosshair, whiteboard and more. (<https://picpick.app/en/>)
 - `Intel Extreme Tuning Utility (Intel XTU)`: a Windows-based performance-tuning software that enables novice and experienced enthusiasts to overclock, monitor, and stress a system. (<https://www.intel.com/content/www/us/en/download/17881/intel-extreme-tuning-utility-intel-xtu.html>)
   - Pro: can reduce boost power to cool down i7 CPU
+- `7-zip`: a file archiver with a high compression ratio. (<https://www.7-zip.org/>)
+  - Pro: calculate checksum via context menu
+- `draw.io`: free diagram software. (<https://drawio-app.com/>)
+- `GitAhead`: a graphical Git client for Windows, Linux and macOS. It features a fast native interface designed to help you understand and manage your source code history. (<https://github.com/gitahead/gitahead>)
+- `Orca`: a database table editor for creating and editing Windows Installer packages and merge modules. (<https://docs.microsoft.com/en-us/windows/win32/msi/orca-exe>)
+- `Royal TS`: a Secure Gateway for remote connections. (<https://www.royalapps.com/ts/win/features>)
+- `ScreenToGif`: Free screen recorder tool, which lets you record, edit and save as a gif, video or other formats. (<https://github.com/NickeManarin/ScreenToGif>)
 
 ## Git
 
@@ -23,3 +30,8 @@
 - `Sourcetree`: A Git GUI that offers a visual representation of your repositories. Sourcetree is a free Git client for Windows and Mac. (<https://tortoisegit.org/>)
   - Pro: can reverse single line
 - `TortoiseGit`: TortoiseGit provides overlay icons showing the file status, a powerful context menu for Git and much more! (<https://tortoisegit.org/>)
+
+## Add to PATH
+
+- `nuget`: package manager for .NET. Move `nuget.exe` to `C:\nuget`.
+- `GitVersion`: a tool that generates a Semantic Version number based on your Git history. Move folder to `C:\gitversion`.
