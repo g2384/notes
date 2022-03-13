@@ -9,3 +9,15 @@ A collection of notes from various sources
 ## Nuget
 
 * [nuget](docs/nuget.md)
+
+## Git
+
+* [git](docs/git.md)
+
+## C#
+
+* [Useful C# methods](docs/cs-methods.md)
+
+## Machine Learning
+
+* [ml](docs/ml.md)
