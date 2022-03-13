@@ -35,6 +35,43 @@
 
 ## Handbook of Data Visualization (2008)
 ### II.6 High-dimensional Data Visualization
+- Data visualization can roughly be categorized into two applications: Exploration, Presentation
+- Interactive linked highlighting, as described by Wills (2008, Chapter II.9 same volume), is one of the keys to the right use of graphics for high-dimensional data. Linking across different graphs can increase the dimensionality beyond the number of dimensions captured in a single multivariate graphic. Thus, the analyst can choose the most appropriate graphics for certain variables of the data set; linking will preserve the multivariate context.
+- Mosaic Plots
+  - the multivariate plots that require the most training for a data analyst.
+  - extremely versatile when all possible interaction and
+variations are employed
+  - Several recommendations can be given for the construction of high-dimensional classical mosaicplots:
+  - The first two and the last two variables in a mosaicplot can be investigated most efficiently regarding their association. Thus the interaction of interest should be put into the last two positions of the plot. Variables that condition an effect should be the first in the plot.
+  - To avoid unnecessary clutter in a mosaicplot of equally important variables, put variables with only a few categories first.
+  - If combinations of cells are empty (this is quite common for high-dimensional data due to the curse of dimensionality), seek variables that create empty cells at high levels in the plot to reduce the number of cells to be plotted (empty cells at a higher level are not divided any further, thus gathering many potential cells into one).
+  - If the last variable in the plot is a binary factor, one can reduce the number of cells by linking the last variable via highlighting. This is the usual way to handle categorical response models.
+  - Subsets of variables may reveal features far more clearly than using all variables at once. In interactive mosaicplots one can add/drop or change variables displayed in a plot. This is very efficient when looking for potential  interactions between variables.
+- Trellis Displays
+  - use conditioning to plot high-dimensional data (similar to mosaicplots)). But whereas mosaicplots use a recursive layout, trellis displays use a gridlike structure to plot the data conditioned on certain subgroups.
+  - example: boxplot y by x
+  - In principle, a single trellis display can hold up to seven variables at a time. Naturally five out of the seven variables need to be categorical, and two can be continuous.
+  - **axis variables**: up to two variables plotted in the panel plot.
+  - **conditioning variables**: Up to three categorical variables, to form rows, columns, and pages of the trellis display.
+  - **adjunct variables**: The two remaining variables can be coded using different glyphs and colors (if the panel plot is a glyph-based plot).
+- Trellis displays and mosaicplots do not have very much in common.
+- Parallel Coordinate Plots
+  - escape the dimensionality of two or three dimensions and can accommodate many variables at a time by plotting the coordinate axes in parallel.
+  - Geometrical Aspects vs. Data Analysis Aspects:
+    - overview, profiles, monitor
+  - Detecting features in parallel coordinates that are **not** visible in a 1-D or 2-D plot is **rare**.
+  - useful for interpreting the findings of multivariate procedures like outlier detection, clustering, or classification in a highly multivariate context.
+  - limits: overplotting (a few hundreds of lines); solution: use opacity
+  - Sorting and Scaling Issues
+    - Parallel coordinate plots are especially useful for variables which either have an order such as time or all share a common scale
+    - Sorting in parallel coordinate plots is crucial for the interpretation of the plots, as interesting patterns are usually revealed at neighboring variables.
+    - Scaling: The most important scaling option is to either individually scale the axes or to use a common scale over all axes. Other scaling options define the alignment of the values, which can be aligned at:
+      - The mean
+      - The median
+      - A specific case
+      - A specific value
+- Projection Pursuit and the Grand Tour
+  - grand tour: A continuous 1-parameter family of d-dimensional projections of p-dimensional data that is dense in the set of all d-dimensional projections in R^p. The parameter is usually thought of as time.
 ### II.7 Multivariate Data Glyphs: Principles and Practice
 -  a glyph is a visual representation of a piece of data where the attributes of a graphical entity are dictated by one or more attributes
 of a data record.
