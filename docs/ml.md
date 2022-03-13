@@ -32,3 +32,39 @@
 #### and overfitting
 - in deep models, the effective degrees of freedom may be decoupled from the number of parameters in the model. (Degrees of Freedom in Deep Neural Networks https://arxiv.org/abs/1603.09260, 2016.)
 - there is a growing trend by statisticians and machine learning practitioners to move away from degrees of freedom for both a proxy for model complexity and as an expectation for overfitting. (Effective Degrees Of Freedom: A Flawed Metaphor https://arxiv.org/abs/1312.7851, 2013.)
+
+## Handbook of Data Visualization (2008)
+### II.6 High-dimensional Data Visualization
+### II.7 Multivariate Data Glyphs: Principles and Practice
+-  a glyph is a visual representation of a piece of data where the attributes of a graphical entity are dictated by one or more attributes
+of a data record.
+- Glyphs are one class of visualization techniques used for multivariate data. Their major **strength**, as compared to techniques such as parallel coordinates, scatterplot matrices, and stacked univariate plots, **is that patterns involving more than two or three data dimensions can often be more readily perceived.**
+- Subsets of dimensions can form composite visual features that analysts can be trained to detect and classify, leading to a richer description of **interrecord** and **intrarecord** relationships than can be extracted using other techniques.
+- Limitations:
+  - They are generally restricted in terms of how accurately they can convey data due to their size and the limits of our visual perception system to measure different graphical attributes.
+  - There are also constraints on the number of data records that can be effectively visualized with glyphs; excessive data set size can result in significant occlusion or the need to reduce the size of each glyph.
+- **Multivariate data**, also called multidimensional or n-dimensional data, consist of some number of items or records, n, each of which is defined by a d-vector of values.
+-  can be viewed as a dxn matrix, where each row represents a **data record** and each column represents an **observation**, **variable**, or **dimension**.
+- Variables/dimensions can be independent or dependent, which might imply that some ordering or grouping of dimensions could be beneficial.
+- graphical attributes to which data values can be mapped: position (1-, 2-, or 3-D), size (length, area, or volume), shape, orientation, material (hue, saturation, intensity, texture, or opacity), line style (width, dashes, or tapers), and dynamics (speed of motion, direction of motion, rate of flashing).
+- biases:
+  - Perception-based bias
+  - Proximity-based bias
+  - Grouping-based bias
+- Ordering of Data Dimensions/Variables:
+  - Correlation-driven
+  - Symmetry-driven
+  - Data-driven
+    - good for time-series data sets to show the evolution of dimensions and their relationships over time.
+  - User-driven
+- Glyph Layout Options:
+  - Data-driven Placement
+    - always result in some overlap between glyphs. Random jitter is commonly added to positions in plotting, especially for data that take on only a small number of possible values.
+  - Structure-driven Placement
+    -  A common type of structure is an ordering relationship, such as in time-series or spatial data.
+    - hierarchical or tree-based structures.
+- Evaluation:
+  - Evaluation based on ranking of human perceptual abilities for different graphical attributes;
+  - Evaluation based on the speed and accuracy of users performing specific tasks;
+  - Evaluation based on ease of detection of data features in the presence of occlusion and clutter
+  - Evaluation based on the scalability of techniques in terms of number of records and dimensions.
