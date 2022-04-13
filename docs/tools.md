@@ -22,6 +22,7 @@
 - `Orca`: a database table editor for creating and editing Windows Installer packages and merge modules. (<https://docs.microsoft.com/en-us/windows/win32/msi/orca-exe>)
 - `Royal TS`: a Secure Gateway for remote connections. (<https://www.royalapps.com/ts/win/features>)
 - `ScreenToGif`: Free screen recorder tool, which lets you record, edit and save as a gif, video or other formats. (<https://github.com/NickeManarin/ScreenToGif>)
+- `Monitorian`: a Windows desktop tool to adjust the brightness of multiple monitors with ease. (<https://github.com/emoacht/Monitorian>)
 
 ## Git
 
