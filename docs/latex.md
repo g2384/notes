@@ -31,9 +31,8 @@
 %...
 \titleformat*{\section}{\normalsize\bfseries} % from \usepackage{titlesec}
 \titleformat{\subsection}[block]
-    {\vspace{-\baselineskip}\small\bfseries}
+    {\small\bfseries}
     {\relax}{0pt}
-    {\vspace{-\baselineskip}}
     {}
 %...
 \begin{flushleft}
@@ -53,5 +52,17 @@ Preview
   ...
 2 Title 2
   ...
-a) ...
+a)
+  ...
+```
+
+## Code
+
+```tex
+    \begin{verbatim}
+var a = 1 + 1;
+    \end{verbatim}
+
+% inline:
+print this \verb|inline-code|.
 ```
