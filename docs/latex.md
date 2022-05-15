@@ -99,3 +99,20 @@ print this \verb|inline-code|.
     \label{fig:one_label}%
 \end{figure}
 ```
+
+## Group
+
+To change `setlength` in a section
+
+```tex
+\begingroup
+\section{Part A}
+\setlength{\parskip}{1em}
+
+...
+
+\endgroup
+
+\section{Part B}
+...
+```
