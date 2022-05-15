@@ -66,3 +66,36 @@ var a = 1 + 1;
 % inline:
 print this \verb|inline-code|.
 ```
+
+## Read tsv, csv as code
+
+```tex
+\usepackage{pgfplotstable, tabularx}
+%...
+\pgfplotstabletypeset[col sep=tab,
+    font=\ttfamily,
+    begin table={\begin{tabularx}{\textwidth}},
+    end table={\end{tabularx}},
+    every column/.style = {verb string type},
+    column type=l,
+    every head row/.style={before row=\hline},
+    every last row/.style={after row=\hline}
+]{file.tsv}
+```
+
+## Images
+
+### row = 1, column = 2
+
+```tex
+\usepackage{graphicx, subcaption, float}
+%...
+\begin{figure}[H]%
+    \centering
+    \subfloat[\centering sub caption a here]{\includegraphics[width=0.48\textwidth]{a.png}}
+    \quad
+    \subfloat[\centering sub caption b here]{\includegraphics[width=0.48\textwidth]{b.png}}
+    \caption{A caption here}%
+    \label{fig:one_label}%
+\end{figure}
+```
