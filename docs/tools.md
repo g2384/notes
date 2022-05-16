@@ -23,6 +23,7 @@
 - `Royal TS`: a Secure Gateway for remote connections. (<https://www.royalapps.com/ts/win/features>)
 - `ScreenToGif`: Free screen recorder tool, which lets you record, edit and save as a gif, video or other formats. (<https://github.com/NickeManarin/ScreenToGif>)
 - `Monitorian`: a Windows desktop tool to adjust the brightness of multiple monitors with ease. (<https://github.com/emoacht/Monitorian>)
+- `Cyberduck`: a libre server and cloud storage browser for Mac and Windows with support for FTP, SFTP, WebDAV, Amazon S3, OpenStack Swift, Backblaze B2, Microsoft Azure & OneDrive, Google Drive and Dropbox. (<https://cyberduck.io/>)
 
 ## Git
 
