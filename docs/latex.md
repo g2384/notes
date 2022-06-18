@@ -100,6 +100,17 @@ print this \verb|inline-code|.
 \end{figure}
 ```
 
+### Place image immediately after text
+
+```tex
+\usepackage{float}
+\begin{figure}[H]
+\end{figure}
+
+\begin{table}[H]
+\end{table}
+```
+
 ## Group
 
 To change `setlength` in a section
