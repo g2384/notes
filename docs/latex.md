@@ -127,3 +127,13 @@ To change `setlength` in a section
 \section{Part B}
 ...
 ```
+
+## def
+
+```tex
+% shorter minus sign
+\def\-{\text{-}}
+
+% usage
+I^{\-1}
+```
