@@ -105,6 +105,7 @@ print this \verb|inline-code|.
 ```tex
 \usepackage{float}
 \begin{figure}[H]
+    \includegraphics[width=8cm]{a.png}
 \end{figure}
 
 \begin{table}[H]

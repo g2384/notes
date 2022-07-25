@@ -21,3 +21,11 @@ A collection of notes from various sources
 ## Machine Learning
 
 * [ml](docs/ml.md)
+
+## LATEX
+
+* [latex](docs/latex.md)
+
+## js methods
+
+* [js methods](docs/js-methods.md)
