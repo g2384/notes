@@ -219,6 +219,61 @@ int v = (int) boxed; // correct
 
 ## Delegates, Lambdas, and Events
 
+The most common way to use an API is to **invoke the methods and properties** its classes provide, but sometimes, things need to work in reverse—the API may need to call your code, an operation often described as a **callback**.
+
+```cs
+public static int FindIndex<T>(
+  T[] array,
+  Predicate<T> match)
+```
+
+**predicate**: in the sense of a function that determines whether something is true or false.
+
+Instances of delegate types are usually just called delegates, and they refer to methods. A method is compatible with (i.e., can be referred to by an instance of) a particular delegate type if its signature matches.
+
+**Multicast delegates**: delegates can refer to more than one method. This is mostly of interest in notification scenarios where you may need to invoke multiple methods when some event occurs.
+- Delegate combination always produces a new delegate. The Combine method does not modify either of the delegates you pass it.
+- we rarely call `Delegate.Combine` explicitly, because C# has built-in support for combining delegates. You can use the `+` or `+=` operators.
+
+```cs
+//combining the three delegates into a single multicast delegate. The two resulting delegates are equivalent
+Predicate<int> megaPredicate1 = greaterThanZero + greaterThanTen + greaterThanOneHundred;
+
+Predicate<int> megaPredicate2 = greaterThanZero;
+megaPredicate2 += greaterThanTen;
+megaPredicate2 += greaterThanOneHundred;
+```
+
+`-` or `-=` operators: produce a new delegate that is a copy of the first operand, but with its last reference to the method referred to by the second operand removed. This turns into a call to `Delegate.Remove`.
+
+If you want to get all the return values from a multicast delegate, you can take control of the invocation process. Delegates offer a `GetInvocationList` method, which returns an array containing a single-method delegate for each of the methods to which the original multicast delegate refers.
+
+The .NET class library provides several useful delegate types
+- `Action`, this type has a `void` return type. take up to 16 parameters.
+- `Func`, allows any return type. take up to 16 parameters.
+
+reason to define a custom delegate type:
+- there are some cases that cannot be expressed with generic type arguments.  if you need a delegate that can work with `ref`, `in`, or `out` parameters.
+- you cannot use a `ref struct` as a generic type argument. e,g, `Action<T>` type `T` can't be the `ref struct` type `Span<int>` (compiler error `Action<Span<int>>`).
+
+sometimes it’s useful to define a specialized delegate type to **indicate particular semantics**.
+- `Predicate<T>` vs `Func<T, bool>`, `Predicate<T>` has an implied meaning: it makes a decision about that `T` instance, and returns `true` or `false` accordingly; not all methods that take a single argument and return a `bool` necessarily fit that pattern.
+
+`in T`: the type parameter `T` in `Predicate<T>` is **contravariant**, which means that if an implicit reference conversion exists between two types, `A` and `B` (e.g. `string` and `object`), an implicit reference conversion also exists between the types `Predicate<B>` and `Predicate<A>`.
+
+`out T`: **Covariance** also works in the same way as it does with interfaces, so it would typically be associated with a delegate’s **return** type.
+
+### anonymous functions
+
+old way: `delegate (int value) { return value > 0; }` (**anonymous method**)
+
+new way: `value => value > 0` (**lambda expression**)
+
+In performance-critical code, you may need to bear the **costs of anonymous functions** in mind. If the anonymous function uses variables from the outer scope, then in addition to the delegate object that you create to refer to the anonymous function, you may be creating an additional one: an instance of the generated class to hold shared local variables. you’re creating additional objects, increasing the pressure on the garbage collector.
+
+**Expression tree**: If that argument to Setup were just a delegate, there would be no way for Moq to inspect it.
+
+
 
 ### Namespace match folder structure
 
