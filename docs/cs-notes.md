@@ -273,7 +273,32 @@ In performance-critical code, you may need to bear the **costs of anonymous func
 
 **Expression tree**: If that argument to Setup were just a delegate, there would be no way for Moq to inspect it.
 
+### Event
 
+use the `+=` syntax to **attach** that delegate as the handler.
+
+**raise** an event = **invoke** all the handlers that have been attached to the event.
+
+Events are particularly important for UI elements.
+
+Standard Event Delegate Pattern:
+- This pattern requires the delegate’s method signature to have two parameters. The first parameter’s type is `object`, and the second’s type is either `EventArgs` or some type derived from `EventArgs`.
+
+`public delegate void EventHandler(object sender, EventArgs e);`
+
+if you want your API to support the **asynchronous** features in C#, you will need to implement the pattern which uses **delegates**, but not events, for completion callbacks.
+
+if you are writing a **UI element**, **events** will most likely be appropriate, because that’s the predominant idiom.
+
+Events, on the other hand, provide a clear way to **subscribe** and **unsubscribe**.
+
+If there will be multiple subscribers for a notification, an event could be the best choice. This is not absolutely necessary, because any delegate is capable of multicast behavior.
+
+## LINQ
+
+**Deferred Evaluation**
+
+Language Integrated Query (LINQ) 
 
 ### Namespace match folder structure
 
