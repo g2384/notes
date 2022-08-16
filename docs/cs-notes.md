@@ -296,9 +296,25 @@ If there will be multiple subscribers for a notification, an event could be the 
 
 ## LINQ
 
-**Deferred Evaluation**
-
 Language Integrated Query (LINQ) 
+
+**Deferred Evaluation**: they return objects that will perform the work on demand. has the benefit of not doing work until you need it, and it makes it possible to work with infinite sequences.
+
+A LINQ provider typically uses `IQueryable<T>` if it wants these expression trees. And that’s usually because it’s going to inspect your query and convert it into something else, such as a SQL query.
+
+```cs
+int[] numbers = { 1, 2, 3, 4, 5 };
+string[] letters = { "A", "B", "C" };
+IEnumerable<string> flattened = numbers.SelectMany(
+  number => letters,
+  (number, letter) => letter + number);
+// A1 B1 C1 A2 B2 C2 A3 B3 C3 A4 B4 C4 A5 B5 C5
+```
+
+`Chunk()` This can be useful in cases where it’s more efficient to process multiple items in a batch than handling them one at a time. That’s often true when IO is involved—there are fixed minimum costs for writing data to disk or sending it over the network, which can often mean that the cost of writing or sending a single record is only slightly smaller than a single operation that writes or sends 10 records. a.k.a `Buffer()` in some libraries.
+
+
+
 
 ### Namespace match folder structure
 
