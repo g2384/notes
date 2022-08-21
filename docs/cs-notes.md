@@ -313,8 +313,17 @@ IEnumerable<string> flattened = numbers.SelectMany(
 
 `Chunk()` This can be useful in cases where it’s more efficient to process multiple items in a batch than handling them one at a time. That’s often true when IO is involved—there are fixed minimum costs for writing data to disk or sending it over the network, which can often mean that the cost of writing or sending a single record is only slightly smaller than a single operation that writes or sends 10 records. a.k.a `Buffer()` in some libraries.
 
+Some LINQ providers therefore choose to offer asynchronous versions of these operators. For example, EF Core offers `SingleAsync`, `ContainsAsync`, `AnyAsync`, `AllAsync`, `ToArrayAsync`, and `ToListAsync`, and equivalents for the other operators we’ll see that perform immediate evaluation.
 
+.NET 6.0 adds a refinement to `SingleOrDefault`, `FirstOrDefault`, and `LastOrDefault`. These get new overloads enabling you to supply a value to return as the default, instead of the usual zero-like value.
 
+.NET 6.0 adds an overload to Take that accepts a Range, enabling the use of the range syntax. For example, `source.Take(10..^10)` skips the first 10 and also the last 10 items (so it is equivalent to `source.Skip(10).SkipLast(10)`).
+
+`source.Take(10..20)` has the same effect as `source.Skip(10).Take(10)`.
+
+`source.Take(^10..^2)` is equivalent to `source.TakeLast(10).SkipLast(2)`.
+
+>>> **Aggregation** The Sum and Average operators add together
 
 ### Namespace match folder structure
 
