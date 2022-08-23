@@ -323,7 +323,19 @@ Some LINQ providers therefore choose to offer asynchronous versions of these ope
 
 `source.Take(^10..^2)` is equivalent to `source.TakeLast(10).SkipLast(2)`.
 
->>> **Aggregation** The Sum and Average operators add together
+If you expect and want to ignore items of the wrong type, use `OfType<T>`. If you do not expect items of the wrong type to be present at all, use `Cast<T>`.
+
+suppose you have something that implements `IQueryable<T>`. That interface derives from `IEnumerable<T>`, but the extension methods that work with `IQueryable<T>` will take precedence over the LINQ to Objects ones. If your intention is to execute a particular query on a database, and then use further client-side processing of the results with LINQ to Objects, you can use `AsEnumerable<T>` to draw a line that says, **“this is where we move things to the client side.”**
+
+`ToDictionary` returns an `IDictionary<TKey, TValue>`, so it is intended for scenarios where a key corresponds to exactly **one** value.
+
+`ToLookup` is designed for scenarios where a key may be associated with **multiple** values, so it returns a different type, `ILookup<TKey, TValue>`.
+
+The advantage of `Enumerable.Empty<T>` is that for any given `T`, it returns the **same instance every time**. This means that if for any reason you end up needing an empty sequence repeatedly in a loop that executes many iterations, `Enumerable.Empty<T>` is more efficient, because it puts less pressure on the garbage collector.
+
+### Other LINQ Implementations
+
+Entity Framework Core: relies on `IQueryable<T>`. Because `IQueryable<T>` derives from `IEnumerable<T>`, it’s possible to use LINQ to Objects operators on any EF source. if you attempt to use a delegate instead of a lambda as, say, the predicate for the `Where` operator, this will fall back to LINQ to Objects. The upshot here is that EF will end up downloading the entire contents of the table and then evaluating the `Where` operator on the client side. This is unlikely to be a good idea.
 
 ## Reactive Extensions (Rx)
 
