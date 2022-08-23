@@ -325,6 +325,33 @@ Some LINQ providers therefore choose to offer asynchronous versions of these ope
 
 >>> **Aggregation** The Sum and Average operators add together
 
+## Reactive Extensions (Rx)
+
+Rx’s fundamental abstraction, `IObservable<T>`, represents a sequence of items, and its operators are defined as extension methods for this interface.
+
+Rx’s push-oriented approach makes it a better match than `IEnumerable<T>` for **event-like sources**.
+
+why not just use events, or even plain delegates?
+- Rx addresses four shortcomings of those alternatives.
+- First, it defines a standard way for sources to report errors.
+- Second, it is able to deliver items in a well-defined order, even in multithreaded scenarios involving numerous sources.
+- Third, Rx provides a clear way to signal when there are no more items.
+- Fourth, because a traditional event is represented by a special kind of member, not a normal object, there are significant limits on what you can do with an event—you can’t pass a .NET event as an argument to a method, store it in a field, or offer it in a property. You can do these things with a delegate, but that’s not the same thing—delegates can handle events, but cannot represent a source of them. There’s no way to write a method that subscribes to some .NET event that you pass as an argument, because you can’t pass the actual event itself. Rx fixes this by representing event sources as objects, instead of a special distinctive element of the type system that doesn’t work like anything else.
+
+There’s a visual convention for representing Rx activity. It’s sometimes called a **marble diagram**, because it consists mainly of small circles that look a bit like marbles.
+
+**Hot sources** notify all current subscribers of values as they become available. This means that any hot observable must keep track of which observers are currently subscribed.
+
+**Cold sources** start pushing values when an observer subscribes, and they provide values to each subscriber separately, rather than broadcasting. This means that a subscriber won’t miss anything by being too late, because the source starts providing items when you subscribe.
+
+## Assemblies
+
+In .NET the unit of deployment for a software component is called an **assembly**, and it is typically a .dll or .exe file. 
+
+The runtime provides an **assembly loader**, which automatically finds and loads the assemblies a program needs.
+
+Assemblies use the Win32 **Portable Executable** (PE) file format, the same format that executables (EXEs) and dynamic link libraries (DLLs) have always used in modern versions of Windows. Even if you’re running .NET on Linux or macOS, it’ll still use this Windows-based format—most .NET assemblies run on all supported operating systems, so we use the same file format everywhere.
+
 ### Namespace match folder structure
 
 > Warning IDE0130 Namespace ... does not match folder structure
