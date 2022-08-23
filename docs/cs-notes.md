@@ -364,6 +364,16 @@ The runtime provides an **assembly loader**, which automatically finds and loads
 
 Assemblies use the Win32 **Portable Executable** (PE) file format, the same format that executables (EXEs) and dynamic link libraries (DLLs) have always used in modern versions of Windows. Even if you’re running .NET on Linux or macOS, it’ll still use this Windows-based format—most .NET assemblies run on all supported operating systems, so we use the same file format everywhere.
 
+### Loading Assemblies
+
+Even if C# didn’t strip out unused references at compile time, there would still be no risk of unnecessary loading of unused DLLs. The CLR does not attempt to load assemblies until your application first needs them. Most applications do not exercise every possible code path each time they execute, so it’s fairly common for significant portions of the code in your application not to run.
+
+There are two main advantages to **self-contained deployment**.
+- First, there is no need to install .NET on target machines—the application can just run directly because it contains its own copy of .NET.
+- Second, you know exactly what version of .NET and which versions of all DLLs you are running against. Microsoft goes to great lengths to ensure backward compatibility with new releases, but breaking changes can sometimes occur, and a self-contained deployment can be one way out if you find that your application stops working after an update to .NET. 
+
+>>> The chosen runtime version selects not
+
 ### Namespace match folder structure
 
 > Warning IDE0130 Namespace ... does not match folder structure
