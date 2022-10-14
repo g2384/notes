@@ -40,3 +40,15 @@ git fetch -j 4 --prune --prune-tags --progress --no-recurse-submodules --depth 1
 # remote: Found 55000 objects to send. (n ms)
 # Receiving objects:   n% (n/55000), n MiB | n MiB/s
 ```
+
+## `git clean -ffdx`
+
+Remove all extra folders and files in this repo + submodules
+
+This gets you in same state as fresh clone.
+
+source: https://stackoverflow.com/a/42185640
+
+why double `f`?
+
+> Git will refuse to modify untracked nested git repositories (directories with a .git subdirectory) unless a second -f is given.
