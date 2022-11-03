@@ -33,3 +33,51 @@ public static IEnumerable<string> GetAllFiles(string path, string mask, Func<Fil
     }
 }
 ```
+
+## Hosted service
+
+```cs
+public static class Program
+{
+    public static void Main(string[] args)
+    {
+        var host = Host.CreateDefaultBuilder(args)
+            .UseWindowsService() // support windows service
+            .ConfigureServices((hostContext, services) =>
+            {
+                services.AddHostedService<TestService>();
+            }).Build();
+        try
+        {
+            host.Run();
+        }
+        finally
+        {
+            host.Dispose();
+        }
+    }
+}
+
+public sealed class TestService : IHostedService
+{
+    private int _counter;
+
+    public Task StartAsync(CancellationToken cancellationToken)
+    {
+        new Thread(() =>
+        {
+            Thread.CurrentThread.IsBackground = true;
+            while (true)
+            {
+                Thread.Sleep(500);
+                _counter++;
+                Console.WriteLine(_counter);
+            }
+        }).Start();
+
+        return Task.CompletedTask;
+    }
+
+    public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+}
+```
