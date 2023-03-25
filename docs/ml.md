@@ -105,3 +105,23 @@ of a data record.
   - Evaluation based on the speed and accuracy of users performing specific tasks;
   - Evaluation based on ease of detection of data features in the presence of occlusion and clutter
   - Evaluation based on the scalability of techniques in terms of number of records and dimensions.
+
+# Dimensionality reduction:
+
+The proposed dimensionality reduction approaches can be categorised by a number of factors including
+whether they are:
+- linear or non-linear approaches
+- supervised or unsupervised approaches
+- suitable for continuous, categorical variables, a combination of the two types of data or dissimilarity
+data
+
+## Principal components analysis (PCA)
+
+It is a **linear** dimensionality reduction approach that finds orthogonal projections of the original (usually) high dimensional data onto a lower dimensional linear space. It is an **unsupervised** method as it does not make any use of the sample labels, even if they exist.
+
+### PCA is widely used for:
+
+- **visualisation purposes** reduce the original data into a two or three-dimensional space. (2, 3 PCAs)
+- **feature extraction** where the number of projections are selected based on the objective, e.g. minimising the mean squared error in a regression problem.
+
+Usually the first PCs provide a good reconstruction of the data into a lower dimensional space, a space that explains that a large proportion of the overall **variance** of the data.

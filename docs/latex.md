@@ -138,3 +138,9 @@ To change `setlength` in a section
 % usage
 I^{\-1}
 ```
+
+## footnotes
+
+```tex
+Here is a footnote \footnote{a, b, c, \url{https://www.google.com}}.
+```

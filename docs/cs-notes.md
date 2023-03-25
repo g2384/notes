@@ -469,3 +469,40 @@ This is disabled in dotnet/roslyn-analyzers (https://github.com/search?q=org%3Ad
 if there's `class Foo : IComparable<Foo> {...}`, you can get the comparer from `Comparer<Foo>.Default`. (https://stackoverflow.com/a/14960372/2431645)
 
 For string comparisons, the `StringComparer` class is recommended over `Comparer<String>`.
+
+---
+
+**Primitive** types are Boolean, Byte, SByte, Int16, UInt16, Int32, UInt32, Int64, UInt64, Char, Double, and Single.
+
+Any data types directly supported by the compiler are called primitive types. Primitive types map directly to types that exist in the base class library.
+
+**Non-primitive** types: class, enum, array, struct, string
+
+`Type.IsPrimitive`: If the current Type represents a generic type, or a type parameter in the definition of a generic type or generic method, this property always returns false. (https://learn.microsoft.com/en-us/dotnet/api/system.type.isprimitive)
+
+**Data types** are separated into **value types** and **reference types**.
+
+Value types are either **stack**-allocated or **allocated inline in a structure**.
+
+Reference types are **heap**-allocated.
+
+Both reference and value types are derived from the ultimate base class `Object`.
+
+**Boxing**: In cases where it is necessary for a value type to behave like an object, a wrapper that makes the value type look like a reference object is allocated on the heap, and the value type's value is copied into it. The wrapper is marked so the system knows that it contains a value type. 
+
+**Unboxing**: the reverse process. Boxing and unboxing allow any type to be treated as an object.
+
+Value types are types that are represented as sequences of bits; value types are not classes or interfaces. `Enums` are a special case of value types. Value types are referred to as "structs" in some programming languages.
+
+`Type.IsValueType`: This property returns false for the `ValueType` class, because `ValueType` is not a value type itself. It is the base class for all value types, and therefore any value type can be assigned to it. This would not be possible if `ValueType` itself was a value type. Value types are boxed when they are assigned to a field of type `ValueType`. This property returns true for enumerations, but not for the `Enum` type itself.
+
+An Array can have any lower bound, but it has a lower bound of zero by default. A different lower bound can be defined when creating an instance of the Array class using CreateInstance. A multidimensional Array can have different bounds for each dimension. An array can have a maximum of 32 dimensions.
+
+Abstract Method
+- Abstract Method resides in abstract class and it has no body.
+- Abstract Method must be overridden in non-abstract child class.
+
+Virtual Method
+- Virtual Method can reside in abstract and non-abstract class.
+- It is not necessary to override virtual method in derived but it can be.
+- Virtual method must have body ....can be overridden by "override keyword".....
