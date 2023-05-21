@@ -488,9 +488,9 @@ Reference types are **heap**-allocated.
 
 Both reference and value types are derived from the ultimate base class `Object`.
 
-**Boxing**: In cases where it is necessary for a value type to behave like an object, a wrapper that makes the value type look like a reference object is allocated on the heap, and the value type's value is copied into it. The wrapper is marked so the system knows that it contains a value type. 
+**Boxing**: an *implicit* process that is used to convert a variable from a **Value Type** to a **Reference Type** data type. In cases where it is necessary for a value type to behave like an object, a wrapper that makes the value type look like a reference object is allocated on the heap, and the value type's value is copied into it. The wrapper is marked so the system knows that it contains a value type. 
 
-**Unboxing**: the reverse process. Boxing and unboxing allow any type to be treated as an object.
+**Unboxing**: an *explicit* conversion process where we convert a **Reference Type** data type into a **Value Type** variable. the reverse process. Boxing and unboxing allow any type to be treated as an object.
 
 Value types are types that are represented as sequences of bits; value types are not classes or interfaces. `Enums` are a special case of value types. Value types are referred to as "structs" in some programming languages.
 
