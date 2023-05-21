@@ -851,7 +851,7 @@ Differences:
 
 - The Thread class is used for creating and manipulating a thread in Windows. A Task represents some asynchronous operation and is part of the Task Parallel Library, a set of APIs for running tasks asynchronously and in parallel.
 - The task can return a result. There is no direct mechanism to return the result from a thread.
-- Task supports cancellation through the use of cancellation tokens. But Thread doesn't.
+- Task supports cancellation through the use of cancellation tokens. But Thread doesn't (before .NET 5).
 - Threads can only have one task running at a time.
 - We can easily implement Asynchronous using ’async’ and ‘await’ keywords.
 - A `new Thread()` is not dealing with Thread pool thread, whereas Task does use thread pool thread.
