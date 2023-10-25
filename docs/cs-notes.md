@@ -506,3 +506,646 @@ Virtual Method
 - Virtual Method can reside in abstract and non-abstract class.
 - It is not necessary to override virtual method in derived but it can be.
 - Virtual method must have body ....can be overridden by "override keyword".....
+
+---
+
+Classes:
+
+Fields, properties, methods, and events on a class are collectively referred to as class members.
+
+A class defines a type of object, but it is not an object itself.
+
+An object is a concrete entity based on a class, and is sometimes referred to as an instance of a class.
+
+Class types:
+
+The `abstract` keyword enables you to create classes and class members that are incomplete and must be implemented in a derived class.
+
+The `sealed` keyword enables you to prevent the inheritance of a class or certain class members that were previously marked `virtual`.
+
+`partial` class: It is possible to split the definition of a class, a struct, an interface or a method over two or more source files. Each source file contains a section of the type or method definition, and all parts are combined when the application is compiled.
+
+A `static` class is basically the same as a non-static class, but there is one difference: a static class cannot be instantiated. Features:
+- Contains only static members.
+- Cannot be instantiated.
+- Is sealed.
+- Cannot contain Instance Constructors.
+
+---
+
+Access modifiers:
+
+- Public: Accessible from anywhere in the code
+- Internal: Only accessible at the current assembly point of the class
+- Protected: Only accessible by class members and classes that inherit from it
+- Private: Only accessible from within the class
+
+---
+
+Properties combine aspects of both fields and methods.
+- To the user of an object, a property appears to be a field, accessing the property requires the same syntax.
+- To the implementer of a class, a property is one or two code blocks, representing a `get` accessor and/or a `set` accessor.
+- The code block for the `get` accessor is executed when the property is read; the code block for the `set` accessor is executed when the property is assigned a value.
+- A property without a `set` accessor is considered read-only.
+- A property without a `get` accessor is considered write-only.
+- A property that has both accessors is read-write.
+- In C# 9 and later, you can use an `init` accessor instead of a `set` accessor to make the property read-only.
+
+Unlike fields, **properties aren't classified as variables**. Therefore, you can't pass a property as a `ref` or `out` parameter.
+
+Properties have many uses:
+- they can **validate** data before allowing a change;
+- they can transparently **expose** data on a class where that data is retrieved from some other source, such as a database;
+- they can take an action when data is changed, such as **raising an event**, or changing the value of other fields.
+
+---
+
+`Finalize` gets called by the garbage collector when this object is no longer in use.
+
+`Dispose` is just a normal method which the user of this class can call to release any resources.
+
+If user forgot to call Dispose and if the class have Finalize implemented then GC will make sure it gets called.
+
+---
+
+Non-Generic Collection Types.
+
+Each non-generic collection can be used to store different types as they are not strongly typed.
+
+- ArrayList: Similar to an array, does not have a specific size, and can store any number of elements
+- HashTable: Stores key-value pairs for each item, does not have a specific size, can store any number of elements, key objects must be immutable
+- SortedList: Combination of ArrayList and HashTable, data stored as key-value pairs, items sorted by keys, items accessed by key or index, does not have a specific size, can store any number of elements
+- Stack: Simple Last-In-First-Out (LIFO) structure, does not have a specific size, can store any number of elements, elements are pushed onto the stack and popped off from the stack
+- Queue: First-In-First-Out (FIFO) structure, does not have a specific size, can store any number of elements, elements are enqueued into the queue and dequeued from the queue
+
+## ArrayList vs List<T>
+
+ArrayList is a non-generic list implementation, uses `object` as it's internal collection, while `List<T>` is generic, and thus strongly typed.
+
+The former came to life when generics were introduced in .NET.
+
+---
+
+`String` is immutable: i.e., strings cannot be altered. When you alter a string (by adding to it for example), you are actually creating a new string.
+
+`StringBuilder` is mutable: so, if you have to alter a string many times, such as multiple concatenations, then use `StringBuilder`.
+
+---
+
+Structures are value types.
+Classes are reference types.
+Records are by default **immutable** reference types. (A record instance can be mutable if you make it mutable.)
+
+Need a reference type: When you need some sort of hierarchy to describe your data types like inheritance or a struct pointing to another struct or basically things pointing to other things.
+
+Records solve the problem when you want your type to be a value oriented by default. Records are reference types but with the value oriented semantic.
+
+Does your data type respect all of these rules (https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/choosing-between-class-and-struct):
+
+- It logically represents a single value, similar to primitive types (int, double, etc.).
+- It has an instance size under 16 bytes.
+- It is immutable.
+- It will not have to be boxed frequently.
+
+Yes? It should be a `struct`.
+No? It should be some reference type.
+
+Does your data type encapsulate some sort of a complex value? Is the value immutable? Do you use it in unidirectional (one way) flow?
+
+Yes? Go with `record`.
+No? Go with `class`.
+
+---
+
+The four basic principles of object-oriented programming are:
+
+- **Abstraction**: Modeling the relevant attributes and interactions of entities as classes to define an abstract representation of a system.
+- **Encapsulation**: Hiding the internal state and functionality of an object and only allowing access through a public set of functions.
+- **Inheritance**: Ability to create new abstractions based on existing abstractions.
+- **Polymorphism**: Ability to implement inherited properties or methods in different ways across multiple abstractions.
+
+---
+
+The System Under Test (**SUT**) from a Unit Testing perspective represents all of the actors (i.e one or more classes) in a test that are not mocks or stubs.
+
+---
+
+In a `checked` context, a `System.OverflowException` is thrown; if overflow happens in a constant expression, a compile-time error occurs.
+
+In an `unchecked` context, the operation result is truncated by discarding any high-order bits that don't fit in the destination type.
+
+```cs
+uint a = uint.MaxValue;
+
+unchecked
+{
+    Console.WriteLine(a + 1);  // output: 0
+}
+
+try
+{
+    checked
+    {
+        Console.WriteLine(a + 1);
+    }
+}
+catch (OverflowException e)
+{
+    Console.WriteLine(e.Message);  // output: Arithmetic operation resulted in an overflow.
+}
+```
+
+---
+
+The `fixed` statement prevents the garbage collector from relocating a moveable variable and declares a pointer to that variable. The address of a fixed, or pinned, variable doesn't change during execution of the statement. You can use the declared pointer only inside the corresponding fixed statement. The declared pointer is readonly and can't be modified. use the `fixed` statement only in an `unsafe` context
+
+```cs
+unsafe
+{
+    byte[] bytes = { 1, 2, 3 };
+    fixed (byte* pointerToFirst = bytes)
+    {
+        Console.WriteLine($"The address of the first array element: {(long)pointerToFirst:X}.");
+        Console.WriteLine($"The value of the first array element: {*pointerToFirst}.");
+    }
+}
+// Output is similar to:
+// The address of the first array element: 2173F80B5C8.
+// The value of the first array element: 1.
+```
+
+---
+
+The `lock` statement acquires the mutual-exclusion lock for a given object, executes a statement block, and then releases the lock. While a lock is held, the thread that holds the lock can again acquire and release the lock. Any other thread is blocked from acquiring the lock and waits until the lock is released. The lock statement ensures that a single thread has exclusive access to that object.
+
+```cs
+lock (x)
+{
+    // Your code...
+}
+```
+
+---
+
+When the control leaves the block of the `using` statement, an acquired IDisposable instance is disposed. In particular, the using statement ensures that a disposable instance is disposed even if an exception occurs within the block of the using statement.
+
+---
+
+Use the `yield` statement in an iterator to provide the next value from a sequence when iterating the sequence. The yield statement has the two following forms:
+
+```cs
+Console.WriteLine(string.Join(" ", TakeWhilePositive(new[] { 2, 3, 4, 5, -1, 3, 4})));
+// Output: 2 3 4 5
+
+Console.WriteLine(string.Join(" ", TakeWhilePositive(new[] { 9, 8, 7 })));
+// Output: 9 8 7
+
+IEnumerable<int> TakeWhilePositive(IEnumerable<int> numbers)
+{
+    foreach (int n in numbers)
+    {
+        if (n > 0)
+        {
+            yield return n; // provide the next value in iteration
+        }
+        else
+        {
+            yield break; // explicitly signal the end of iteration
+        }
+    }
+}
+```
+
+---
+
+Minimize memoery usage (https://learn.microsoft.com/en-us/windows/apps/performance/disk-memory):
+
+There are a variety of ways to minimize the amount of memory that your Windows app uses, you can:
+
+- Reduce foreground memory usage
+- Minimize background work
+- Release resources while in the background
+- Ensure your application does not leak memory
+
+The amount of memory that an application uses impacts its runtime performance, as well as the responsiveness of the system as a whole. Minimizing the use of memory will help the app to perform better by reducing the CPU costs associated with accessing more memory. Lower memory usage also helps with the system responsiveness, and the app user's experience in general, as the application does not end up displacing other memory content.
+
+---
+
+.NET SQL injections
+
+use parametrized queries
+
+Parametrized queries avoid SQL injection in a clever way: You simply don't include the user-provided values in the query at all. They are provided to the database separately, never being part of the text of the SQL query itself.
+
+```cs
+private static void UpdateDemographics(Int32 customerID,
+    string demoXml, string connectionString)
+{
+    // Update the demographics for a store, which is stored  
+    // in an xml column.  
+    string commandText = "UPDATE Sales.Store SET Demographics = @demographics "
+        + "WHERE CustomerID = @ID;";
+
+    using (SqlConnection connection = new SqlConnection(connectionString))
+    {
+        SqlCommand command = new SqlCommand(commandText, connection);
+        command.Parameters.Add("@ID", SqlDbType.Int);
+        command.Parameters["@ID"].Value = customerID;
+
+        // Use AddWithValue to assign Demographics. 
+        // SQL Server will implicitly convert strings into XML.
+        command.Parameters.AddWithValue("@demographics", demoXml);
+
+        try
+        {
+            connection.Open();
+            Int32 rowsAffected = command.ExecuteNonQuery();
+            Console.WriteLine("RowsAffected: {0}", rowsAffected);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
+}
+```
+
+the majority of applications today use an ORM (object relational mapping) package to help abstract and simplify database access.
+
+- Dapper (https://github.com/DapperLib/Dapper), simple and lightweight. The Dapper ORM is implemented as a set of extension methods on the IDbConnection interface. This means that it can be used with SQLite, MySQL, PostgreSQL, and any other database where a .NET ADO provider is available. Async versions of these methods are also available.
+
+```cs
+string connectionString = "Server=.;Database=AdventureWorksDW2017;Trusted_Connection=True;";
+string searchTerm = "AW00011010"; 
+string sql = $@"SELECT EmailAddress
+                FROM dbo.DimCustomer
+                WHERE CustomerAlternateKey = @SearchTerm";
+ 
+using (var connection = new SqlConnection(connectionString))
+{
+    connection.Open();    
+    var emails = connection.Query<string>(
+        sql, 
+        new { SearchTerm = searchTerm }); 
+    Console.WriteLine("Records count: {0}", emails.Count());
+}
+```
+
+- Entity Framework
+
+```cs
+string connectionString = "Server=.;Database=AdventureWorksDW2017;Trusted_Connection=True;";
+string searchTerm = "AW00011010"; 
+string sql = $@"SELECT EmailAddress                  
+                FROM dbo.DimCustomer
+                WHERE CustomerAlternateKey = @SearchTerm";
+
+using (var dbContext = new AdventureWorksDbContext(connectionString))
+{
+    var emails = dbContext.Database.SqlQuery<string>(
+        sql, 
+        new SqlParameter("@SearchTerm", searchTerm)).ToList();
+    Console.WriteLine("Records count: {0}", emails.Count());
+}
+```
+
+---
+
+## principle of least privilege
+
+A great security practice, but in general is what's sometimes called the principle of least privilege. It simply means always choosing the least possible privilege for executing any sensitive action. For instance, if you're integrating with some API and you need to generate a token, make sure you only grant the permissions you'll actually use in your app, and nothing more.
+
+In the case of databases, the principle of least privilege means using database logins that can only do the bare minimum.
+
+---
+
+## Linked list vs list/array
+
+Linked lists are preferable over arrays when:
+
+- you need constant-time insertions/deletions from the list (such as in real-time computing where time predictability is absolutely critical)
+- you **don't know how many items** will be in the list. With arrays, you may need to re-declare and copy memory if the array grows too big
+- you don't need **random access** to any elements. O(n)
+- you want to be able to **insert** items in the middle of the list (such as a priority queue)
+
+Arrays are preferable when:
+
+- you need **indexed/random access** to elements. O(1)
+- you **know the number of elements** in the array ahead of time so that you can allocate the correct amount of memory for the array
+- you need speed when iterating through all the elements in sequence. You can use pointer math on the array to access each element, whereas you need to lookup the node based on the pointer for each element in linked list, which may result in page faults which may result in performance hits.
+- memory is a concern. Filled arrays take up **less memory** than linked lists. Each element in the array is just the data. Each linked list node requires the data as well as one (or more) pointers to the other elements in the linked list.
+
+---
+
+Task Parallel Library (TPL)
+
+Task: A task is an object that represents some work that should be done. The task can tell you if the work is completed and if the operation returns a result, the task gives you the result.
+
+Why need task: It can be used whenever you want to execute something in parallel. Asynchronous implementation is easy in a task, using’ async’ and ‘await’ keywords.
+
+Thread: A Thread is a small set of executable instructions.
+
+Why need thread: When the time comes when the application is required to perform few tasks at the same time.
+
+Differences:
+
+- The Thread class is used for creating and manipulating a thread in Windows. A Task represents some asynchronous operation and is part of the Task Parallel Library, a set of APIs for running tasks asynchronously and in parallel.
+- The task can return a result. There is no direct mechanism to return the result from a thread.
+- Task supports cancellation through the use of cancellation tokens. But Thread doesn't (before .NET 5).
+- Threads can only have one task running at a time.
+- We can easily implement Asynchronous using ’async’ and ‘await’ keywords.
+- A `new Thread()` is not dealing with Thread pool thread, whereas Task does use thread pool thread.
+- A Task is a higher level concept than Thread.
+
+---
+
+Linear Search is defined as a sequential search algorithm that starts at one end and goes through each element of a list until the desired element is found, otherwise the search continues till the end of the data set.
+
+Binary Search is a searching algorithm used in a sorted array by repeatedly dividing the search interval in half. The idea of binary search is to use the information that the array is sorted and reduce the time complexity to O(Log n).
+
+```
+binarySearch(arr, x, low, high)
+        if low > high
+            return False 
+
+        else
+            mid = (low + high) / 2 
+            if x == arr[mid]
+                return mid
+    
+            else if x > arr[mid]        // x is on the right side
+                return binarySearch(arr, x, mid + 1, high)
+            
+            else                        // x is on the left side
+                return binarySearch(arr, x, low, mid - 1) 
+```
+
+---
+
+## Memory management
+
+`managed` code: code whose execution is managed by a runtime. In this case, the runtime in question is called the Common Language Runtime or CLR. CLR is in charge of taking the managed code, compiling it into machine code and then executing it. On top of that, runtime provides several important services such as automatic memory management, security boundaries, type safety etc.
+
+Managed code is written in one of the high-level languages that can be run on top of .NET, such as C#, Visual Basic, F# and others. When you compile code written in those languages with their respective compiler, you don't get machine code. You get **Intermediate Language** code which the runtime then compiles and executes.
+
+compilation of code -> produces intermediate language -> CLR starts the process of Just-In-Time compiling -> compile code to machine code
+
+**Interoperability** enables you to preserve and take advantage of existing investments in unmanaged code. Code that runs under the control of the common language runtime (CLR) is managed code, and code that runs outside the CLR is unmanaged code.
+
+Similar to this, C# is one language that allows you to use unmanaged constructs such as pointers directly in code by utilizing what is known as **unsafe context** which designates a piece of code for which the execution is not managed by the CLR.
+
+COM, COM+, C++ components, ActiveX components, and Microsoft Windows API are examples of unmanaged code.
+
+Automatic Memory Management: The Common Language Runtime's garbage collector manages the allocation and release of memory for an application.
+
+### Allocating memory
+
+managed heap: When you initialize a new process, the runtime reserves a contiguous region of address space for the process. This reserved address space is called the managed heap. All **reference types** are allocated on the managed heap.
+
+Allocating memory from the managed heap is faster than unmanaged memory allocation. Because the runtime allocates memory for an object by adding a value to a pointer, it is almost as fast as allocating memory from the stack. 
+
+Because new objects that are allocated consecutively are stored contiguously in the managed heap, an application can access the objects very quickly.
+
+### Releasing Memory
+
+The garbage collector's optimizing engine determines the best time to perform a collection based on the allocations being made. When the garbage collector performs a collection, it releases the memory for objects that are no longer being used by the application.
+
+application's roots: An application's roots include static fields, local variables and parameters on a thread's stack, and CPU registers.
+
+It determines which objects are no longer being used by examining the **application's roots**. Every application has a set of roots. Each root either refers to an object on the managed heap or is set to null. The garbage collector has access to the list of active roots that the just-in-time (JIT) compiler and the runtime maintain. Using this list, it examines an application's roots, and in the process creates a graph that contains all the objects that are reachable from the roots.
+
+Memory is compacted only if a collection discovers a significant number of unreachable objects. If all the objects in the managed heap survive a collection, then there is no need for memory compaction.
+
+To improve performance, the runtime allocates memory for large objects in a separate heap. The garbage collector automatically releases the memory for large objects. However, to avoid moving large objects in memory, this memory is not compacted.
+
+### Generations and Performance
+
+To optimize the performance of the garbage collector, the managed heap is divided into three generations: 0, 1, and 2.
+
+Generalizations:
+- First, it is faster to compact the memory for a portion of the managed heap than for the entire managed heap.
+- Secondly, newer objects will have shorter lifetimes and older objects will have longer lifetimes.
+- Lastly, newer objects tend to be related to each other and accessed by the application around the same time.
+
+The runtime's garbage collector stores new objects in generation 0. Objects created early in the application's lifetime that survive collections are promoted and stored in generations 1 and 2.
+
+Because it is faster to compact a portion of the managed heap than the entire heap, this scheme allows the garbage collector to release the memory in a specific generation rather than release the memory for the entire managed heap each time it performs a collection.
+
+attept to create a new object -> garbage collector discovers generation 0 is full -> Garbage collector performs a collection in generation 0 -> free address space for the new object -> compact the memory for the reachable objects -> promote these objects and considers this portion of the managed heap generation 1 -> a collection of generation 0 alone often reclaims enough memory. -> if not enough memory, perform a collection of generation 1 then generation 2.
+
+### Releasing Memory for Unmanaged Resources
+
+For the majority of the objects that your application creates, you can rely on the garbage collector to automatically perform the necessary memory management tasks. However, unmanaged resources require explicit cleanup.
+
+The most common type of unmanaged resource is an object that wraps an operating system resource, such as a file handle, window handle, network connection, or database connections.
+
+When you create an object that encapsulates an unmanaged resource, it is recommended that you provide the necessary code to clean up the unmanaged resource in a public `Dispose` method.
+
+- Implement the dispose pattern: This requires that you provide an IDisposable.Dispose implementation to enable the deterministic release of unmanaged resources.
+- In the event that a consumer of your type forgets to call Dispose, provide a way for your unmanaged resources to be released. There are two ways to do this:
+  - (recommended) Use a safe handle to wrap your unmanaged resource. Safe handles are derived from the `System.Runtime.InteropServices.SafeHandle` abstract class and include a robust `Finalize` method. When you use a safe handle, you simply implement the `IDisposable` interface and call your safe handle's `Dispose` method in your `IDisposable.Dispose` implementation. The safe handle's finalizer is called automatically by the garbage collector if its `Dispose` method is **not** called. (for file, pipe, memory mapped files, process, registry key, etc)
+  - Define a `finalizer`. Finalization enables the non-deterministic release of unmanaged resources when the consumer of a type fails to call `IDisposable.Dispose` to dispose of them deterministically. (Note: Object finalization can be a complex and **error-prone operation**, we recommend that you use a safe handle instead of providing your own finalizer.)
+
+---
+
+The following problems may occur due to Thread Synchronization.
+- Deadlock
+- Starvation
+- Priority Inversion
+- Busy Waiting
+
+---
+
+A deadlock occurs when each thread (minimum of two) tries to acquire a lock on a resource already locked by another.
+- Thread 1 locked on Resources 1 tries to acquire a lock on Resource 2.
+- At the same time, Thread 2 has a lock on Resource 2 and it tries to acquire a lock on Resource 1.
+- Two threads never give up their locks, hence the deadlock occurs.
+
+Locking affects performance, as thread wait for each other. You have to analyse the workflow to determine what really needs to be locked.
+
+```cs
+// execute: DeadLock.Start();
+public class DeadLock
+{
+    private static object lockA = new object();
+    private static object lockB = new object();
+
+    private static void CompleteWork1()
+    {
+        lock (lockA)
+        {
+            Console.WriteLine("Trying to Acquire lock on lockB");
+            lock (lockB)
+            {
+                Console.WriteLine("Critical Section of CompleteWork1");
+                //Access some shared critical section.  
+            }
+        }
+    }
+
+    private static void CompleteWork2()
+    {
+        lock (lockB)
+        {
+            Console.WriteLine("Trying to Acquire lock on lockA");
+            lock (lockA)
+            {
+                Console.WriteLine("Critical Section of CompleteWork2");
+                //Access some shared critical section.  
+            }
+        }
+    }
+
+    public static void Start()
+    {
+        Thread thread1 = new Thread(CompleteWork1);
+        Thread thread2 = new Thread(CompleteWork2);
+
+        thread1.Start();
+        thread2.Start();
+
+        thread1.Join();
+        thread2.Join();
+
+        //Below code section will never execute due to deadlock.  
+        Console.WriteLine("Processing Completed....");
+    }
+}
+```
+
+Fix:
+
+1. **Avoid holding a lock for too long**: when a thread holds a lock for too long, it may cause a deadlock. To avoid it, you need to make sure that you release the lock as soon as you don’t need it.
+1. **Avoid nested locks**: It’s difficult to manage nested locks. And one of the common causes of a deadlock is using nested locks. If you have to use multiple locks, try to acquire them in a fixed order to avoid deadlocks.
+    - Basically what you have to do is make sure that you are locking resources **in the same order in all the threads**. This way when the first common resource is locked by one thread no other thread can continue executing and locking on any other common resource required by the first thread.
+1. **Use a timeout**: the timeout can help prevent a deadlock from occurring. If a thread is waiting for a lock for a certain time that exceeds the timeout, you can throw an exception or take other actions.
+1. **Use asynchronous programming technique**: asynchronous programming allows multiple threads to run concurrently without blocking each other, which helps avoid deadlocks.
+
+
+deadlock vs livelock:
+
+Deadlock: A situation in which two or more processes are unable to proceed because each is waiting for one the others to do something.
+
+Livelock: A situation in which two or more processes continuously change their states in response to changes in the other process(es) without doing any useful work
+
+---
+
+`Thread.Abort` is obsolete: Given that `Thread.Abort` always throws a `PlatformNotSupportedException` on all .NET implementations except .NET Framework.
+
+Use a `CancellationToken` to abort processing of a unit of work instead of calling `Thread.Abort`.
+
+```cs
+void ProcessPendingWorkItemsNew(CancellationToken cancellationToken)
+{
+    if (QueryIsMoreWorkPending())
+    {
+        // If the CancellationToken is marked as "needs to cancel",
+        // this will throw the appropriate exception.
+        cancellationToken.ThrowIfCancellationRequested();
+
+        WorkItem work = DequeueWorkItem();
+        ProcessWorkItem(work);
+    }
+}
+```
+
+---
+
+Foreground Threads vs Background Threads
+
+- A managed thread is either a background thread or a foreground thread.
+- Background threads are identical to foreground threads with one exception: a background thread does not keep the managed execution environment running. Once all foreground threads have been stopped in a managed process (where the .exe file is a managed assembly), the system stops all background threads and shuts down.
+- If you use a thread to monitor an activity, such as a socket connection, set its `IsBackground` property to true so that the thread does not prevent your process from terminating.
+- Threads that belong to the **managed thread pool** (that is, threads whose IsThreadPoolThread property is true) are background threads.
+- All threads that enter the managed execution environment **from unmanaged code** are marked as background threads.
+- All threads generated by creating and starting a **new Thread** object are by default foreground threads.
+
+---
+
+Mutex vs Monitors
+
+- The Locks and Monitors ensure thread safety for threads that are InProcess
+  - i.e. the threads that are generated by the application itself i.e. Internal Threads.
+  - But if the threads are coming from OutProcess i.e. from external applications then Locks and Monitors have no control over them.
+  - `lock` internally use `Monitor`
+- Mutex ensures thread safety for threads that are Out-Process i.e. the threads that are generated by the external applications i.e. External Threads.
+
+Mutex vs Semaphore
+
+- Mutex works like a lock i.e. acquired an **exclusive lock** on a shared resource from concurrent access, but it works across multiple processes. As we already discussed exclusive locking is basically used to ensure that at any given point in time, **only one thread** can enter into the critical section.
+- The Semaphore Class in C# is used to limit the number of external threads that can have access to a shared resource concurrently. In other words, we can say that Semaphore allows one or more external threads to enter into the critical section and execute the task concurrently with thread safety.
+
+
+---
+
+# High-Performance Programming in C# and .NET
+
+Roslyn: .NET compiler
+
+benefit of init:
+
+- From a constructor of the type, or a derived type
+- From an object initializer, ie. `new SomeType { Property = value }`
+- From within the construct with the new with keyword, ie. `var copy = original with { Property = newValue }`
+- From within the `init` accessor of another property (so one `init` accessor can write to other `init` accessor properties)
+- From attribute specifiers, so you can still write `[AttributeName(InitProperty = value)]`
+
+Records
+
+- Records allow complete objects to be immutable and behave as values.
+- The advantage of using records over `struct` is that they require less memory to be allocated to them.
+- This reduction in memory allocation is accomplished by compiling records to reference types.
+- They are then accessed via references and not as copies.
+- Due to this, other than the original record allocation, no further memory allocation is required.
+- can create new immutable types from them and change any fields we like using the `with` expression.
+- Records can also use inheritance. `internal record Book : Publisher { }`
+- case: When updating data, you do not want that data to be changed by another thread.
+
+```cs
+public record Product
+{
+    readonly string Name;
+    readonly string Description
+
+    public Product(string name, string description)
+        => (Name, Description) = (name, description);
+    public void Deconstruct(out string name, out string description)
+        => (name, description) = (Name, Description);
+}
+
+...
+
+var ide = new Product("Awesome-X", "Advanced Multi-Language IDE");
+var (product, description) = ide; // Deconstruct
+```
+
+Covariant
+
+With covariant returns, base class methods with **less specific** return types can be overridden with methods that return **more specific** types.
+`public interface IExampleInterface<out T> { }`
+
+example of covariance: declared an `object` array. Then, we assigned a `string` array to it. The `object` array is the least specific array type, while the
+`string` array is the more specific array type.
+
+`object[] covariantArray = new string[] { "alpha", "beta", "gamma", "delta" };`
+
+Compilation
+
+- When .NET code is compiled, it is compiled into Microsoft Intermediate Language (MSIL).
+- MSIL gets interpreted by a JIT compiler when it is needed.
+- The JIT compiler then compiles the necessary MSIL code into native binary code.
+- MSIL code is always slower than native code, as it is compiled to native on the first run.
+- JIT code has the advantage of being cross-platform code at the expense of longer startup times.
+- The code of an MSIL assembly that runs is compiled to native code by the JIT compiler.
+- The native code is optimized by the JIT compiler for the target hardware it is running on.
+
+Improving ASP.NET performance
+
+- Begin by optimizing the code with the largest impact
+- Enable HTTP compression: To reduce the size of transmitted files over HTTP/HTTPS and improve network performance, enable compression. There are two types of compression. GZIP compression has been around for many years and is the de facto compression mechanism; it can reduce a file's size by one-third. An alternative compression mechanism is Brotli.
+- Reduce TCP/IP connection overheads: Reducing HTTP requests seriously improves HTTP communication performance. Each request uses network and hardware resources.
+- Use HTTP/2 over SSL: HTTP/2 over SSL provides various performance improvements of using HTTP. Multiplexed streams provide bi-directional sequences of text format frames.
+- Employ minification: Minification is the process of eliminating whitespace and comments in an HTML, CSS, or JavaScript web file.
+- Place CSS in the head so that it loads first
+- Place JavaScript at the end of HTML files
+- Reduce image size
