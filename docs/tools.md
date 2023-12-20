@@ -18,12 +18,12 @@
 - `7-zip`: a file archiver with a high compression ratio. (<https://www.7-zip.org/>)
   - Pro: calculate checksum via context menu
 - `draw.io`: free diagram software. (<https://drawio-app.com/>)
-- `GitAhead`: a graphical Git client for Windows, Linux and macOS. It features a fast native interface designed to help you understand and manage your source code history. (<https://github.com/gitahead/gitahead>)
 - `Orca`: a database table editor for creating and editing Windows Installer packages and merge modules. (<https://docs.microsoft.com/en-us/windows/win32/msi/orca-exe>)
 - `Royal TS`: a Secure Gateway for remote connections. (<https://www.royalapps.com/ts/win/features>)
 - `ScreenToGif`: Free screen recorder tool, which lets you record, edit and save as a gif, video or other formats. (<https://github.com/NickeManarin/ScreenToGif>)
 - `Monitorian`: a Windows desktop tool to adjust the brightness of multiple monitors with ease. (<https://github.com/emoacht/Monitorian>)
 - `Cyberduck`: a libre server and cloud storage browser for Mac and Windows with support for FTP, SFTP, WebDAV, Amazon S3, OpenStack Swift, Backblaze B2, Microsoft Azure & OneDrive, Google Drive and Dropbox. (<https://cyberduck.io/>)
+- `Herbie`: Find and fix floating-point problems: `sqrt(x+1) - sqrt(x) -> 1/(sqrt(x+1) + sqrt(x))`. (<https://herbie.uwplse.org/>)
 
 ## Git
 
@@ -32,6 +32,7 @@
 - `Sourcetree`: A Git GUI that offers a visual representation of your repositories. Sourcetree is a free Git client for Windows and Mac. (<https://tortoisegit.org/>)
   - Pro: can reverse single line
 - `TortoiseGit`: TortoiseGit provides overlay icons showing the file status, a powerful context menu for Git and much more! (<https://tortoisegit.org/>)
+- `GitAhead`: a graphical Git client for Windows, Linux and macOS. It features a fast native interface designed to help you understand and manage your source code history. (<https://github.com/gitahead/gitahead>)
 
 ## Add to PATH
 
