@@ -24,6 +24,7 @@
 - `Monitorian`: a Windows desktop tool to adjust the brightness of multiple monitors with ease. (<https://github.com/emoacht/Monitorian>)
 - `Cyberduck`: a libre server and cloud storage browser for Mac and Windows with support for FTP, SFTP, WebDAV, Amazon S3, OpenStack Swift, Backblaze B2, Microsoft Azure & OneDrive, Google Drive and Dropbox. (<https://cyberduck.io/>)
 - `Herbie`: Find and fix floating-point problems: `sqrt(x+1) - sqrt(x) -> 1/(sqrt(x+1) + sqrt(x))`. (<https://herbie.uwplse.org/>)
+- `Burp Suite`: Inspect all http requests. (<https://portswigger.net/burp/communitydownload>)
 
 ## Git
 
