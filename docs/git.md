@@ -52,3 +52,11 @@ source: https://stackoverflow.com/a/42185640
 why double `f`?
 
 > Git will refuse to modify untracked nested git repositories (directories with a .git subdirectory) unless a second -f is given. (https://git-scm.com/docs/git-clean)
+
+## blame a deleted line
+
+> git log -S <string> path/to/file
+
+e.g.
+
+> git log -S "var a = 0;" UnitTest.cs
