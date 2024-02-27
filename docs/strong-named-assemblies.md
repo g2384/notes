@@ -1,0 +1,11 @@
+- Strong-naming an assembly creates a unique identity for the assembly, and can prevent assembly conflicts.
+- Do not rely on strong names for security. They provide a unique identity only.
+- Why strong-name your assemblies?
+  - your assemblies can be referenced by strong-named assemblies
+  - an app needs access to different versions of the same assembly.
+  - You do not want to negatively affect performance of apps using your assembly, so you want the assembly to be domain neutral. This requires strong-naming because a domain-neutral assembly must be installed in the **global assembly cache**.
+  - You want to centralize servicing for your app by applying publisher policy, which means the assembly must be installed in the global assembly cache.
+- For .NET Core and .NET 5+, strong-named assemblies do not provide material benefits. The runtime never validates the strong-name signature, nor does it use the strong-name for assembly binding.
+- sources
+  - https://learn.microsoft.com/en-us/dotnet/standard/assembly/strong-named
+  - https://github.com/dotnet/runtime/blob/main/docs/project/strong-name-signing.md
