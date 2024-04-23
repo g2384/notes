@@ -25,6 +25,7 @@
 - `Cyberduck`: a libre server and cloud storage browser for Mac and Windows with support for FTP, SFTP, WebDAV, Amazon S3, OpenStack Swift, Backblaze B2, Microsoft Azure & OneDrive, Google Drive and Dropbox. (<https://cyberduck.io/>)
 - `Herbie`: Find and fix floating-point problems: `sqrt(x+1) - sqrt(x) -> 1/(sqrt(x+1) + sqrt(x))`. (<https://herbie.uwplse.org/>)
 - `Burp Suite`: Inspect all http requests. (<https://portswigger.net/burp/communitydownload>)
+- `MicrosoftProgram_Install_and_Uninstall.meta.diagcab`: Fix problems that block programs from being installed or removed, any programs, on Windows. (<https://support.microsoft.com/en-gb/topic/fix-problems-that-block-programs-from-being-installed-or-removed-cca7d1b6-65a9-3d98-426b-e9f927e1eb4d>)
 
 ## Git
 
