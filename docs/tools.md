@@ -26,6 +26,7 @@
 - `Herbie`: Find and fix floating-point problems: `sqrt(x+1) - sqrt(x) -> 1/(sqrt(x+1) + sqrt(x))`. (<https://herbie.uwplse.org/>)
 - `Burp Suite`: Inspect all http requests. (<https://portswigger.net/burp/communitydownload>)
 - `MicrosoftProgram_Install_and_Uninstall.meta.diagcab`: Fix problems that block programs from being installed or removed, any programs, on Windows. (<https://support.microsoft.com/en-gb/topic/fix-problems-that-block-programs-from-being-installed-or-removed-cca7d1b6-65a9-3d98-426b-e9f927e1eb4d>)
+- `pandoc`: Universal markup converter. (<https://github.com/jgm/pandoc>)
 
 ## Git
 
